@@ -3,6 +3,11 @@ const app = express();
 const port = 3000;
 const path = require('path');
 
+app.use((req, res, next) => {
+  res.setHeader('Content-Security-Policy', "default-src * 'unsafe-inline' 'unsafe-eval' data: blob:");
+  next();
+});
+
 app.get('/image', (req, res) => {
   res.setHeader(
     'Link',
